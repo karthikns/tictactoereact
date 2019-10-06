@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
   return <Game />;
 }
 
 function Game() {
-  const [state, setState] = useState({
+  const startingState = {
     currentPlayer: "X",
     nextPlayer: "O",
     board: [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]],
     isGameInProgress: true
-  });
+  };
+
+  const [state, setState] = useState(startingState);
 
   function isYCompleted(cellY, board) {
     if (board[cellY][0] == "-") {
@@ -127,16 +127,38 @@ function Game() {
     setCurrentPlayer(state.nextPlayer);
   }
 
+  function resetGame() {
+    setState(startingState);
+  }
+
   return (
     <div>
       <GameStatus isGameInProgress={state.isGameInProgress} />
       <br />
       <br />
+      <Tiles board={state.board} onTileClicked={onTileClicked} />
+      <br />
+      <br />
+      <CurrentPlayer currentPlayer={state.currentPlayer} />
+      <br />
+      <br />
+      <button onClick={resetGame}>Reset Game</button>
+    </div>
+  );
+}
+
+function Tiles(props) {
+  function onTileClicked(cellX, cellY) {
+    props.onTileClicked(cellX, cellY);
+  }
+
+  return (
+    <div>
       <table border="1">
         <tr>
           <td>
             <Tile
-              cellState={state.board[0][0]}
+              cellState={props.board[0][0]}
               onTileClicked={onTileClicked}
               cellY={0}
               cellX={0}
@@ -144,7 +166,7 @@ function Game() {
           </td>
           <td>
             <Tile
-              cellState={state.board[0][1]}
+              cellState={props.board[0][1]}
               onTileClicked={onTileClicked}
               cellY={0}
               cellX={1}
@@ -152,7 +174,7 @@ function Game() {
           </td>
           <td>
             <Tile
-              cellState={state.board[0][2]}
+              cellState={props.board[0][2]}
               onTileClicked={onTileClicked}
               cellY={0}
               cellX={2}
@@ -162,7 +184,7 @@ function Game() {
         <tr>
           <td>
             <Tile
-              cellState={state.board[1][0]}
+              cellState={props.board[1][0]}
               onTileClicked={onTileClicked}
               cellY={1}
               cellX={0}
@@ -170,7 +192,7 @@ function Game() {
           </td>
           <td>
             <Tile
-              cellState={state.board[1][1]}
+              cellState={props.board[1][1]}
               onTileClicked={onTileClicked}
               cellY={1}
               cellX={1}
@@ -178,7 +200,7 @@ function Game() {
           </td>
           <td>
             <Tile
-              cellState={state.board[1][2]}
+              cellState={props.board[1][2]}
               onTileClicked={onTileClicked}
               cellY={1}
               cellX={2}
@@ -188,7 +210,7 @@ function Game() {
         <tr>
           <td>
             <Tile
-              cellState={state.board[2][0]}
+              cellState={props.board[2][0]}
               onTileClicked={onTileClicked}
               cellY={2}
               cellX={0}
@@ -196,7 +218,7 @@ function Game() {
           </td>
           <td>
             <Tile
-              cellState={state.board[2][1]}
+              cellState={props.board[2][1]}
               onTileClicked={onTileClicked}
               cellY={2}
               cellX={1}
@@ -204,7 +226,7 @@ function Game() {
           </td>
           <td>
             <Tile
-              cellState={state.board[2][2]}
+              cellState={props.board[2][2]}
               onTileClicked={onTileClicked}
               cellY={2}
               cellX={2}
@@ -212,9 +234,6 @@ function Game() {
           </td>
         </tr>
       </table>
-      <br />
-      <br />
-      <CurrentPlayer currentPlayer={state.currentPlayer} />
     </div>
   );
 }
@@ -228,7 +247,12 @@ function Tile(props) {
         height: "50px",
         textAlign: "center"
       }}
-      onClick={() => props.onTileClicked(props.cellX, props.cellY)}
+      onClick={() => {
+        if (cellState != "") {
+          return;
+        }
+        props.onTileClicked(props.cellX, props.cellY);
+      }}
     >
       {cellState}
     </div>
