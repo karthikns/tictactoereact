@@ -6,8 +6,7 @@ export default function App() {
 
 function Game() {
   const startingState = {
-    currentPlayer: "X",
-    nextPlayer: "O",
+    turn: "X",
     board: [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]],
     isGameInProgress: true
   };
@@ -83,7 +82,7 @@ function Game() {
       return true;
     }
 
-    // Check if the game ended in a draw
+    // Check if the game has ended in a draw
     let hasGameEndedInADraw = true;
     for (let i = 0; i < 3; ++i) {
       for (let j = 0; j < 3; ++j) {
@@ -96,25 +95,16 @@ function Game() {
     return hasGameEndedInADraw;
   }
 
-  function setCurrentPlayer(player) {
-    setState({
-      currentPlayer: player,
-      nextPlayer: player == "X" ? "O" : "X",
-      board: state.board,
-      isGameInProgress: state.isGameInProgress
-    });
+  function setNextTurn(currentTurn) {
+    state.turn = currentTurn == "X" ? "O" : "X";
   }
 
   function setBoardState(cellX, cellY) {
-    state.board[cellY][cellX] = state.currentPlayer;
+    state.board[cellY][cellX] = state.turn;
   }
 
   function onTileClicked(cellX, cellY) {
     if (!state.isGameInProgress) {
-      return;
-    }
-
-    if (state.board[cellY][cellX] != "-") {
       return;
     }
 
@@ -124,7 +114,13 @@ function Game() {
       state.isGameInProgress = false;
     }
 
-    setCurrentPlayer(state.nextPlayer);
+    setNextTurn(state.turn);
+
+    setState({
+      turn: state.turn,
+      board: state.board,
+      isGameInProgress: state.isGameInProgress
+    });
   }
 
   function resetGame() {
@@ -139,7 +135,7 @@ function Game() {
       <Tiles board={state.board} onTileClicked={onTileClicked} />
       <br />
       <br />
-      <CurrentPlayer currentPlayer={state.currentPlayer} />
+      <CurrentTurn turn={state.turn} />
       <br />
       <br />
       <button onClick={resetGame}>Reset Game</button>
@@ -152,11 +148,17 @@ function Tiles(props) {
     props.onTileClicked(cellX, cellY);
   }
 
+  let style = {
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "rgb(128,0,0)"
+  };
+
   return (
     <div>
-      <table border="1">
+      <table>
         <tr>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[0][0]}
               onTileClicked={onTileClicked}
@@ -164,7 +166,7 @@ function Tiles(props) {
               cellX={0}
             />
           </td>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[0][1]}
               onTileClicked={onTileClicked}
@@ -172,7 +174,7 @@ function Tiles(props) {
               cellX={1}
             />
           </td>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[0][2]}
               onTileClicked={onTileClicked}
@@ -182,7 +184,7 @@ function Tiles(props) {
           </td>
         </tr>
         <tr>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[1][0]}
               onTileClicked={onTileClicked}
@@ -190,7 +192,7 @@ function Tiles(props) {
               cellX={0}
             />
           </td>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[1][1]}
               onTileClicked={onTileClicked}
@@ -198,7 +200,7 @@ function Tiles(props) {
               cellX={1}
             />
           </td>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[1][2]}
               onTileClicked={onTileClicked}
@@ -208,7 +210,7 @@ function Tiles(props) {
           </td>
         </tr>
         <tr>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[2][0]}
               onTileClicked={onTileClicked}
@@ -216,7 +218,7 @@ function Tiles(props) {
               cellX={0}
             />
           </td>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[2][1]}
               onTileClicked={onTileClicked}
@@ -224,7 +226,7 @@ function Tiles(props) {
               cellX={1}
             />
           </td>
-          <td>
+          <td style={style}>
             <Tile
               cellState={props.board[2][2]}
               onTileClicked={onTileClicked}
@@ -259,8 +261,8 @@ function Tile(props) {
   );
 }
 
-function CurrentPlayer(props) {
-  return <div>Next Turn: {props.currentPlayer}</div>;
+function CurrentTurn(props) {
+  return <div>Next Turn: {props.turn}</div>;
 }
 
 function GameStatus(props) {
