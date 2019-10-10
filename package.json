@@ -2,7 +2,7 @@
   "name": "fulljs",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://need4eat.github.io/tictactoereact/",
+  "homepage": "https://karthikns.github.io/tictactoereact/",
   "main": "index.js",
   "scripts": {
     "predeploy": "npm run build",
