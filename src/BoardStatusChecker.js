@@ -35,10 +35,6 @@ export function getTicTacToeGameStatus(board, cellX, cellY) {
 }
 
 function isYCompleted(cellY, board) {
-  if (board[cellY][0] == "-") {
-    return false;
-  }
-
   const candidate = board[cellY][0];
   for (let x = 0; x < 3; ++x) {
     if (board[cellY][x] != candidate) {
@@ -50,10 +46,6 @@ function isYCompleted(cellY, board) {
 }
 
 function isXCompleted(cellX, board) {
-  if (board[0][cellX] == "-") {
-    return false;
-  }
-
   const candidate = board[0][cellX];
   for (let y = 0; y < 3; ++y) {
     if (board[y][cellX] != candidate) return false;
@@ -62,10 +54,6 @@ function isXCompleted(cellX, board) {
 }
 
 function isTopLeftDiagonalCompleted(board) {
-  if (board[0][0] == "-") {
-    return false;
-  }
-
   const candidate = board[0][0];
   for (let i = 0; i < 3; ++i) {
     if (board[i][i] != candidate) {
@@ -77,10 +65,6 @@ function isTopLeftDiagonalCompleted(board) {
 }
 
 function isTopRightDiagonalCompleted(board) {
-  if (board[0][2] == "-") {
-    return false;
-  }
-
   const candidate = board[0][2];
   for (let i = 0; i < 3; ++i) {
     if (board[i][2 - i] != candidate) {
