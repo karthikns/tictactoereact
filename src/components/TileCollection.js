@@ -11,7 +11,7 @@ export default function TileCollection(props) {
     return outArray;
   }
 
-  const boardStyle = { width: "156px", height: "auto" };
+  const boardStyle = { width: "156px", height: "156px" };
 
   return (
     <div style={{ ...boardStyle }}>
