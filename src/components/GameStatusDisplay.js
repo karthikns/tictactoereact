@@ -2,9 +2,7 @@ import React from "react";
 
 export default function GameStatusDisplay(props) {
   return (
-    <div
-      style={{ padding: "25px", fontSize: "40px", fontFamily: "sans-serif" }}
-    >
+    <div style={{ padding: "25px", fontSize: "40px" }}>
       {props.gameState.isGameInProgress ? (
         <NextTurnDisplay nextTurn={props.gameState.nextTurn} />
       ) : (

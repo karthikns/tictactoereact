@@ -79,15 +79,20 @@ function Game() {
 
   const gameWidth = 500;
 
+  const gameColors = {
+    backgroundColor: TicTacToeColor.GAME_BACKGROUND,
+    color: TicTacToeColor.GAME_TEXT
+  };
+
+  const gameStyle = {
+    ...gameColors,
+    fontFamily: "sans-serif",
+    textAlign: "center",
+    width: gameWidth + "px"
+  };
+
   return (
-    <div
-      style={{
-        backgroundColor: TicTacToeColor.GAME_BACKGROUND,
-        color: TicTacToeColor.GAME_TEXT,
-        textAlign: "center",
-        width: gameWidth + "px"
-      }}
-    >
+    <div style={gameStyle}>
       <GameStatusDisplay gameState={gameState} />
       <br />
       <br />
