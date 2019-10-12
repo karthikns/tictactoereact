@@ -7,3 +7,7 @@ export const TicTacToeColor = {
   X_COLOR: "#35F",
   O_COLOR: "#0B8"
 };
+
+export const TicTacToeLayout = {};
+
+export const TicTacToeGridProperties = { BORDER_WIDTH: "2px" };
