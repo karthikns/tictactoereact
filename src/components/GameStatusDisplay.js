@@ -10,12 +10,6 @@ export default function GameStatusDisplay(props) {
       )}
     </div>
   );
-
-  if (props.gameState.isGameInProgress) {
-    return <NextTurnDisplay nextTurn={props.gameState.nextTurn} />;
-  } else {
-    return <GameOverDisplay winner={props.gameState.winner} />;
-  }
 }
 
 function GameOverDisplay(props) {

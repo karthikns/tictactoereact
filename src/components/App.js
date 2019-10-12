@@ -3,6 +3,7 @@ import {
   TicTacToeGameStatus,
   getTicTacToeGameStatus
 } from "../BoardStatusChecker";
+import { TicTacToeColor } from "../TicTacToeConstants";
 import TileCollection from "./TileCollection";
 import ResetButton from "./ResetButton";
 import GameStatusDisplay from "./GameStatusDisplay";
@@ -81,8 +82,8 @@ function Game() {
   return (
     <div
       style={{
-        backgroundColor: "#222",
-        color: "#FFF",
+        backgroundColor: TicTacToeColor.GAME_BACKGROUND,
+        color: TicTacToeColor.GAME_TEXT,
         textAlign: "center",
         width: gameWidth + "px"
       }}
