@@ -81,7 +81,11 @@ function Game() {
       <GameStatusDisplay gameState={gameState} />
       <br />
       <br />
-      <TileCollection board={state.board} onTileClicked={onTileClicked} />
+      <TileCollection
+        board={state.board}
+        onTileClicked={onTileClicked}
+        boardSize={500}
+      />
       <br />
       <br />
       <ResetButton resetGame={resetGame} />

@@ -3,15 +3,16 @@ import React from "react";
 export default function Tile(props) {
   const cellText = props.cellState == "-" ? "" : props.cellState;
 
+  const fontSizePxString = props.fontSizePx + "px";
   const font = {
     fontFamily: "sans-serif",
-    fontSize: "36px",
+    fontSize: fontSizePxString,
     color: props.cellState == "X" ? "blue" : "red"
   };
 
   const layout = {
-    width: "50px",
-    height: "50px",
+    width: "32%",
+    height: "32%",
     textAlign: "center",
     verticalAlign: "middle",
     display: "table-cell",
@@ -21,13 +22,13 @@ export default function Tile(props) {
   };
 
   const rightBorder = {
-    borderRightWidth: "1px",
+    borderRightWidth: "2px",
     borderRightStyle: "solid",
     borderRightColor: "black"
   };
 
   const bottomBorder = {
-    borderBottomWidth: "1px",
+    borderBottomWidth: "2px",
     borderBottomStyle: "solid",
     borderBottomColor: "black"
   };
