@@ -17,10 +17,10 @@ function GameOverDisplay(props) {
   }
 
   const style = { fontFamily: "sans-serif" };
-  return <div style={style}>{displayString}</div>;
+  return <span style={style}>{displayString}</span>;
 }
 
 function NextTurnDisplay(props) {
   const style = { fontFamily: "sans-serif" };
-  return <div style={style}>Next Turn: {props.nextTurn}</div>;
+  return <span style={style}>Next Turn: {props.nextTurn}</span>;
 }
