@@ -76,15 +76,24 @@ function Game() {
     winner: state.winner
   };
 
+  const gameWidth = 500;
+
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#222",
+        color: "#FFF",
+        textAlign: "center",
+        width: gameWidth + "px"
+      }}
+    >
       <GameStatusDisplay gameState={gameState} />
       <br />
       <br />
       <TileCollection
         board={state.board}
         onTileClicked={onTileClicked}
-        boardSize={500}
+        boardSize={gameWidth - 10}
       />
       <br />
       <br />

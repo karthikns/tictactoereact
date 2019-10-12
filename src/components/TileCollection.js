@@ -19,7 +19,8 @@ export default function TileCollection(props) {
   const c_boardSizePxString = c_boardSizePx + "px";
   const c_boardStyle = {
     width: c_boardSizePxString,
-    height: c_boardSizePxString
+    height: c_boardSizePxString,
+    padding: "10px"
   };
 
   const c_fontSizeMultiplier = 0.25;

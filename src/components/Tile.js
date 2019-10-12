@@ -7,7 +7,7 @@ export default function Tile(props) {
   const font = {
     fontFamily: "sans-serif",
     fontSize: fontSizePxString,
-    color: props.cellState == "X" ? "blue" : "red"
+    color: props.cellState == "X" ? "#35F" : "#0B8"
   };
 
   const layout = {
@@ -21,16 +21,17 @@ export default function Tile(props) {
     padding: "0"
   };
 
+  const gridColor = "#BBB";
   const rightBorder = {
     borderRightWidth: "2px",
     borderRightStyle: "solid",
-    borderRightColor: "black"
+    borderRightColor: gridColor
   };
 
   const bottomBorder = {
     borderBottomWidth: "2px",
     borderBottomStyle: "solid",
-    borderBottomColor: "black"
+    borderBottomColor: gridColor
   };
 
   const rightBorderStyle = props.cellX < 2 ? rightBorder : {};
