@@ -1,4 +1,5 @@
 import React from "react";
+import { TicTacToeColor, TicTacToeGridProperties } from "../TicTacToeConstants";
 
 export default function Tile(props) {
   const cellText = props.cellState == "-" ? "" : props.cellState;
@@ -7,7 +8,8 @@ export default function Tile(props) {
   const font = {
     fontFamily: "sans-serif",
     fontSize: fontSizePxString,
-    color: props.cellState == "X" ? "blue" : "red"
+    color:
+      props.cellState == "X" ? TicTacToeColor.X_COLOR : TicTacToeColor.O_COLOR
   };
 
   const layout = {
@@ -21,16 +23,17 @@ export default function Tile(props) {
     padding: "0"
   };
 
+  const gridColor = TicTacToeColor.GRID_COLOR;
   const rightBorder = {
-    borderRightWidth: "2px",
+    borderRightWidth: TicTacToeGridProperties.BORDER_WIDTH,
     borderRightStyle: "solid",
-    borderRightColor: "black"
+    borderRightColor: gridColor
   };
 
   const bottomBorder = {
-    borderBottomWidth: "2px",
+    borderBottomWidth: TicTacToeGridProperties.BORDER_WIDTH,
     borderBottomStyle: "solid",
-    borderBottomColor: "black"
+    borderBottomColor: gridColor
   };
 
   const rightBorderStyle = props.cellX < 2 ? rightBorder : {};

@@ -1,26 +1,65 @@
 import React from "react";
-
+import { TicTacToeDebugBorder, TicTacToeColor } from "../TicTacToeConstants";
 export default function GameStatusDisplay(props) {
-  if (props.gameState.isGameInProgress) {
-    return <NextTurnDisplay nextTurn={props.gameState.nextTurn} />;
-  } else {
-    return <GameOverDisplay winner={props.gameState.winner} />;
+  return (
+    <div
+      style={{
+        ...TicTacToeDebugBorder,
+        fontSize: Math.floor(props.gameWidth * 0.08) + "px",
+        padding: Math.floor(props.gameWidth * 0.04) + "px",
+        marginBottom: Math.floor(props.gameWidth * 0.1) + "px"
+      }}
+    >
+      {props.gameState.isGameInProgress ? (
+        <NextTurnDisplay nextTurn={props.gameState.nextTurn} />
+      ) : (
+        <GameOverDisplay winner={props.gameState.winner} />
+      )}
+    </div>
+  );
+}
+
+function GetCandidateInfo(candidate) {
+  let candidateInfo = { displayValue: "", displayStyle: {} };
+
+  if (candidate == "X") {
+    candidateInfo.displayValue = candidate;
+    candidateInfo.displayStyle.color = TicTacToeColor.X_COLOR;
+  } else if (candidate == "O") {
+    candidateInfo.displayValue = candidate;
+    candidateInfo.displayStyle.color = TicTacToeColor.O_COLOR;
   }
+
+  return candidateInfo;
 }
 
 function GameOverDisplay(props) {
-  let displayString = "It's a DRAW!";
+  let status = "It's a DRAW!";
   if (props.winner == "X") {
-    displayString = "X WON!";
+    status = "WON!";
   } else if (props.winner == "O") {
-    displayString = "O WON!";
+    status = "WON!";
   }
 
-  const style = { fontFamily: "sans-serif" };
-  return <span style={style}>{displayString}</span>;
+  const candidateInfo = GetCandidateInfo(props.winner);
+  return (
+    <div>
+      <span style={candidateInfo.displayStyle}>
+        {candidateInfo.displayValue}{" "}
+      </span>
+      {status}
+    </div>
+  );
 }
 
 function NextTurnDisplay(props) {
-  const style = { fontFamily: "sans-serif" };
-  return <span style={style}>Next Turn: {props.nextTurn}</span>;
+  const candidateInfo = GetCandidateInfo(props.nextTurn);
+  return (
+    <div>
+      Next Turn:{" "}
+      <span style={candidateInfo.displayStyle}>
+        {candidateInfo.displayValue}
+      </span>
+    </div>
+  );
 }

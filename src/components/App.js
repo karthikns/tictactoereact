@@ -3,6 +3,7 @@ import {
   TicTacToeGameStatus,
   getTicTacToeGameStatus
 } from "../BoardStatusChecker";
+import { TicTacToeColor, TicTacToeDebugBorder } from "../TicTacToeConstants";
 import TileCollection from "./TileCollection";
 import ResetButton from "./ResetButton";
 import GameStatusDisplay from "./GameStatusDisplay";
@@ -76,19 +77,30 @@ function Game() {
     winner: state.winner
   };
 
+  const gameWidth = 500;
+
+  const gameColors = {
+    backgroundColor: TicTacToeColor.GAME_BACKGROUND,
+    color: TicTacToeColor.GAME_TEXT
+  };
+
+  const gameStyle = {
+    ...TicTacToeDebugBorder,
+    ...gameColors,
+    fontFamily: "sans-serif",
+    textAlign: "center",
+    width: gameWidth + "px"
+  };
+
   return (
-    <div>
-      <GameStatusDisplay gameState={gameState} />
-      <br />
-      <br />
+    <div style={gameStyle}>
+      <GameStatusDisplay gameState={gameState} gameWidth={gameWidth} />
       <TileCollection
         board={state.board}
         onTileClicked={onTileClicked}
-        boardSize={500}
+        gameWidth={gameWidth}
       />
-      <br />
-      <br />
-      <ResetButton resetGame={resetGame} />
+      <ResetButton resetGame={resetGame} gameWidth={gameWidth} />
     </div>
   );
 }
