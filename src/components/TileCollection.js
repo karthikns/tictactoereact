@@ -1,5 +1,6 @@
 import React from "react";
 import Tile from "./Tile";
+import { TicTacToeDebugBorder } from "../TicTacToeConstants";
 
 export default function TileCollection(props) {
   function range(n) {
@@ -11,16 +12,24 @@ export default function TileCollection(props) {
     return outArray;
   }
 
+  const boardWidthRatio = 0.98;
+  const c_boardSizeFromGameWidth = Math.floor(
+    props.gameWidth * boardWidthRatio
+  );
   const c_minimumSupportedBoardSizePx = 100;
   const c_boardSizePx =
-    props.boardSize < c_minimumSupportedBoardSizePx
+    c_boardSizeFromGameWidth < c_minimumSupportedBoardSizePx
       ? c_minimumSupportedBoardSizePx
-      : props.boardSize;
+      : c_boardSizeFromGameWidth;
   const c_boardSizePxString = c_boardSizePx + "px";
+
+  const marginRatio = (1 - boardWidthRatio) / 2;
+  const margin = Math.floor(props.gameWidth * marginRatio);
   const c_boardStyle = {
+    ...TicTacToeDebugBorder,
     width: c_boardSizePxString,
     height: c_boardSizePxString,
-    padding: "10px"
+    margin: margin + "px"
   };
 
   const c_fontSizeMultiplier = 0.25;

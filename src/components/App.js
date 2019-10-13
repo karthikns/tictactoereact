@@ -3,7 +3,7 @@ import {
   TicTacToeGameStatus,
   getTicTacToeGameStatus
 } from "../BoardStatusChecker";
-import { TicTacToeColor } from "../TicTacToeConstants";
+import { TicTacToeColor, TicTacToeDebugBorder } from "../TicTacToeConstants";
 import TileCollection from "./TileCollection";
 import ResetButton from "./ResetButton";
 import GameStatusDisplay from "./GameStatusDisplay";
@@ -85,6 +85,7 @@ function Game() {
   };
 
   const gameStyle = {
+    ...TicTacToeDebugBorder,
     ...gameColors,
     fontFamily: "sans-serif",
     textAlign: "center",
@@ -93,17 +94,13 @@ function Game() {
 
   return (
     <div style={gameStyle}>
-      <GameStatusDisplay gameState={gameState} />
-      <br />
-      <br />
+      <GameStatusDisplay gameState={gameState} gameWidth={gameWidth} />
       <TileCollection
         board={state.board}
         onTileClicked={onTileClicked}
-        boardSize={gameWidth - 10}
+        gameWidth={gameWidth}
       />
-      <br />
-      <br />
-      <ResetButton resetGame={resetGame} />
+      <ResetButton resetGame={resetGame} gameWidth={gameWidth} />
     </div>
   );
 }

@@ -11,3 +11,9 @@ export const TicTacToeColor = {
 export const TicTacToeLayout = {};
 
 export const TicTacToeGridProperties = { BORDER_WIDTH: "2px" };
+
+export const TicTacToeDebugBorder = {
+  borderWidth: "1px",
+  borderColor: "#FF0",
+  borderStyle: "none"
+};

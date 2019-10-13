@@ -1,5 +1,5 @@
 import React from "react";
-import { TicTacToeColor } from "../TicTacToeConstants";
+import { TicTacToeColor, TicTacToeDebugBorder } from "../TicTacToeConstants";
 
 export default function ResetButton(props) {
   const color = {
@@ -10,19 +10,25 @@ export default function ResetButton(props) {
 
   const style = {
     ...color,
-    marginBottom: "20px",
-    fontSize: "30px",
+    fontSize: Math.floor(props.gameWidth * 0.06) + "px",
     borderRadius: "8px"
   };
 
   return (
-    <button
-      style={style}
-      onClick={() => {
-        props.resetGame();
+    <div
+      style={{
+        ...TicTacToeDebugBorder,
+        marginTop: Math.floor(props.gameWidth * 0.1) + "px"
       }}
     >
-      &nbsp;&nbsp;Reset Game&nbsp;&nbsp;
-    </button>
+      <button
+        style={style}
+        onClick={() => {
+          props.resetGame();
+        }}
+      >
+        &nbsp;&nbsp;Reset Game&nbsp;&nbsp;
+      </button>
+    </div>
   );
 }
